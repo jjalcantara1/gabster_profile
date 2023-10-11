@@ -8,7 +8,7 @@ from .models import Testimonial
 class TestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
-        fields = ['content', 'rating']
+        fields = ['content']
 
     user_to = forms.ModelChoiceField(
         queryset=UserAccount.objects.all(),
@@ -16,11 +16,11 @@ class TestimonialForm(forms.ModelForm):
         required=False  # Make the field non-required
     )
 
-    rating = forms.IntegerField(
-        label='Rating',
-        widget=forms.NumberInput(attrs={'type': 'number', 'min': 1, 'max': 5}),
-        validators=[MinValueValidator(1), MaxValueValidator(5)]
-    )
+    # rating = forms.IntegerField(
+    #     label='Rating',
+    #     widget=forms.NumberInput(attrs={'type': 'number', 'min': 1, 'max': 5}),
+    #     validators=[MinValueValidator(1), MaxValueValidator(5)]
+    # )
     def clean(self):
         cleaned_data = super().clean()
         content = cleaned_data.get('content')

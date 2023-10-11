@@ -10,13 +10,13 @@ class Testimonial(models.Model):
     user_to = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='testimonials_received')
     content = models.TextField()
     createdAt = models.DateTimeField(default=timezone.now)
-    rating = models.PositiveIntegerField(
-        default=0,
-        validators=[
-            MinValueValidator(1, "Rating must be at least 1"),
-            MaxValueValidator(5, "Rating cannot be more than 5")
-        ]
-    )
+    # rating = models.PositiveIntegerField(
+    #     default=0,
+    #     validators=[
+    #         MinValueValidator(1, "Rating must be at least 1"),
+    #         MaxValueValidator(5, "Rating cannot be more than 5")
+    #     ]
+    # )
 
     def __str__(self):
         return f"Testimonial from {self.user_from.username} to {self.user_to.username}"

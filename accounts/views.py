@@ -87,5 +87,4 @@ def post(request):
     return render(request, "posts/post.html", {})
 
 
-# def testimonials(request):
-#     return render(request, "posts/testimonials.html", {})
+
