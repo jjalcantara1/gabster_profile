@@ -61,6 +61,7 @@
 {% block content %}
 <div class="center-content">
     <div class="testimonial-container">
+     {% if testimonials_received %}
         {% for testimonial in testimonials_received %}
             <a href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}" class="testimonial-card">
                 <div class="col-md-12 grid-margin">
@@ -131,6 +132,9 @@
                 </div>
             </a>
         {% endfor %}
+        {% else %}
+            <h4 style="align-content: center">No testimonials yet.</h4>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
