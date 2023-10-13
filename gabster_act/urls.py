@@ -20,7 +20,8 @@ from django.urls import path, include, re_path  # para mainclude ung views ng po
 from django.conf import settings
 from django.conf.urls.static import static
 from Post.views import *
-from accounts.views import login_view, register_view, logout_view, post
+from accounts.views import login_view, register_view, logout_view
+from Post.views import *
 from testimonials import views
 from testimonials.views import *
 from .views import *

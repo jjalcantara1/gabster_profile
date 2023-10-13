@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django import forms
 from .forms import PostForm
 
+
 #
 # # Create your views here.
 # class PostListView(ListView):
@@ -28,3 +29,7 @@ def create_post(request):
         form = PostForm()
 
     return render(request, 'post.html', {'form': form})
+
+
+def post(request):
+    return render(request, "posts/post.html", {})
