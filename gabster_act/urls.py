@@ -25,6 +25,7 @@ from Post.views import *
 from testimonials import views
 from testimonials.views import *
 from .views import *
+from Post.views import post_list
 from templates import *
 # from general.views import home_screen_view
 # from django.conf.urls import url
@@ -33,7 +34,7 @@ from templates import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name='home'),
-    path('post/', post, name='post'),
+    path('posts/', post_list, name='post_list'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
@@ -51,6 +52,7 @@ urlpatterns = [
     path('testimonials/<str:user_to_username>/<int:testimonial_id>/', views.testimonial_detail, name='testimonial_detail'),
     path('addtestimonials/<str:user_to_username>/', views.add_testimonial, name='add_testimonial'),
     # re_path(r'^testimonials/(?P<username>[\w.@+-]+)$', views.view_testimonials, name='view_testimonials'),
+    path('createpost/<str:user>/', create_post, name='create_post'),
 
 
 ]

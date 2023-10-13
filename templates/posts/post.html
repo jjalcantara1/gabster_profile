@@ -72,63 +72,61 @@
 {#</html>#}
 
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create a New Post</title>
+    <title>Create a New Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 
     <link href="{% static 'profile/post.css' %}" rel="stylesheet">
 
-	<link id="theme-style" rel="stylesheet" type="text/css" href="">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-	<!-- <section class="Post"> -->
-		<div class="post-container">
-			<h1 style="text-align: center">Create a New Post</h1>
+    <div class="post-container">
+        <h1 style="text-align: center">Create a New Post</h1>
 
-			<form id="post-form">
+{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <label for="content">What's on your mind?</label>#}
+{#            <textarea class="post-field" name="content" id="content"></textarea>#}
+{##}
+{#            <label>Select Type:</label>#}
+{#            <label for="picture">#}
+{#                <input type="radio" name="post-type" value="picture" id="post_type"> Picture#}
+{#            </label>#}
+{#            <label for="video">#}
+{#                <input type="radio" name="post-type" value="video" id="post_type"> Video#}
+{#            </label>#}
+{##}
+{#            <div id="picture-upload" style="display: none;">#}
+{#                <label for="picture-file">Upload Picture:</label>#}
+{#                <input type="file" name="picture" id="picture">#}
+{#            </div>#}
+{##}
+{#            <div id="video-upload" style="display: none;">#}
+{#                <label for="video-file">Upload Video:</label>#}
+{#                <input type="file" name="video" id="video">#}
+{#            </div>#}
+{##}
+{#            <input id="submit-btn" type="submit" value="Post">#}
+{#        </form>#}
 
-                    <label>Subject</label>
-                    <label>
-                        <input class="subject-field" type="text" name="subject">
-                    </label>
-
-                    <label>What's on your mind?</label>
-                    <label>
-                        <textarea class="post-field" name="message"></textarea>
-                    </label>
-
-                    <label>Select Type:</label>
-                    <label>
-                        <input type="radio" name="post-type" value="picture">
-                    </label> Picture
-                    <label>
-                        <input type="radio" name="post-type" value="video">
-                    </label> Video
-
-                    <div id="picture-upload" style="display: none;">
-                        <label>Upload File:</label>
-                        <input type="file" name="picture">
-                    </div>
-
-                    <div id="video-upload" style="display: none;">
-                        <label>Upload File:</label>
-                        <input type="file" name="video">
-                    </div>
-
-                    <input id="submit-btn" type="submit" value="Post">
-
-                </form>
+                <form method="post" enctype="multipart/form-data" id="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Post">
+        </form>
 
 {#                <div class="col-md-8 col-xl-6 middle-wrapper">#}
 {#                    <div class="row" id="posts-container">#}

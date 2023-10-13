@@ -14,7 +14,7 @@ from .forms import PostForm
 #     template_name = 'posts/list_view.html'
 
 
-def create_post(request):
+def create_post(request,user):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -24,12 +24,13 @@ def create_post(request):
             new_post.user = user
             new_post.save()
 
-            return redirect('profile.html')
+            return redirect('profile', username=user)
     else:
         form = PostForm()
 
-    return render(request, 'post.html', {'form': form})
+    return render(request, 'posts/post.html', {'form': form})
 
 
-def post(request):
-    return render(request, "posts/post.html", {})
+def post_list(request):
+    posts = Post.objects.all()  # You can adjust this query as needed
+    return render(request, 'profile/profile.html', {'posts': posts})
