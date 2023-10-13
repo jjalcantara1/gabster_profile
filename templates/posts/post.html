@@ -1,3 +1,76 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#	<title>Create a New Post</title>#}
+{##}
+{#	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">#}
+{##}
+{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
+{#	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">#}
+{##}
+{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
+{#	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">#}
+{##}
+{#    <link href="{% static 'profile/post.css' %}" rel="stylesheet">#}
+{##}
+{#	<link id="theme-style" rel="stylesheet" type="text/css" href="">#}
+{#</head>#}
+{#<body>#}
+{#    <div class="post-container">#}
+{#        <h1 style="text-align: center">Create a New Post</h1>#}
+{##}
+{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{##}
+{#            <div id="picture-upload" style="display: none;">#}
+{#                <label>Upload Picture:</label>#}
+{#                {{ form.picture }}#}
+{#            </div>#}
+{##}
+{#            <div id="video-upload" style="display: none;">#}
+{#                <label>Upload Video:</label>#}
+{#                {{ form.video }}#}
+{#            </div>#}
+{##}
+{#            <input type="submit" value="Post">#}
+{#        </form>#}
+{##}
+{#        <!-- Existing posts will be appended here dynamically -->#}
+{#        <div class="col-md-8 col-xl-6 middle-wrapper">#}
+{#            <div class="row" id="posts-container">#}
+{#                <!-- Existing posts will be appended here dynamically -->#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <script>#}
+{#            document.addEventListener('DOMContentLoaded', function() {#}
+{#                let pictureRadio = document.querySelector('input[value="picture"]');#}
+{#                let videoRadio = document.querySelector('input[value="video"]');#}
+{#                let pictureUpload = document.getElementById('picture-upload');#}
+{#                let videoUpload = document.getElementById('video-upload');#}
+{##}
+{#                pictureRadio.addEventListener('change', function() {#}
+{#                    toggleUploadSection(pictureUpload, videoUpload);#}
+{#                });#}
+{##}
+{#                videoRadio.addEventListener('change', function() {#}
+{#                    toggleUploadSection(videoUpload, pictureUpload);#}
+{#                });#}
+{##}
+{#                function toggleUploadSection(showSection, hideSection) {#}
+{#                    hideSection.style.display = 'none';#}
+{#                    showSection.style.display = 'block';#}
+{#                }#}
+{#            });#}
+{#        </script>#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -25,19 +98,82 @@
 
 			<form id="post-form">
 
-				<label>Subject</label>
-				<input class="subject-field" type="text" name="subject">
+                    <label>Subject</label>
+                    <label>
+                        <input class="subject-field" type="text" name="subject">
+                    </label>
 
-				<label>What's on your mind?</label>
-				<textarea class="post-field" name="message"></textarea> 
+                    <label>What's on your mind?</label>
+                    <label>
+                        <textarea class="post-field" name="message"></textarea>
+                    </label>
 
-				<input id="photo-btn" type="submit" value="Add Photo">
-				<input id="video-btn" type="submit" value="Add Video">
-				<input id="submit-btn" type="submit" value="Post">
+                    <label>Select Type:</label>
+                    <label>
+                        <input type="radio" name="post-type" value="picture">
+                    </label> Picture
+                    <label>
+                        <input type="radio" name="post-type" value="video">
+                    </label> Video
 
-			</form>
-		</div>
-	<!-- </section> -->
+                    <div id="picture-upload" style="display: none;">
+                        <label>Upload File:</label>
+                        <input type="file" name="picture">
+                    </div>
+
+                    <div id="video-upload" style="display: none;">
+                        <label>Upload File:</label>
+                        <input type="file" name="video">
+                    </div>
+
+                    <input id="submit-btn" type="submit" value="Post">
+
+                </form>
+
+{#                <div class="col-md-8 col-xl-6 middle-wrapper">#}
+{#                    <div class="row" id="posts-container">#}
+{#                        <!-- Existing posts will be appended here dynamically -->#}
+{#                    </div>#}
+{#                </div>#}
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let pictureRadio = document.querySelector('input[value="picture"]');
+                    let videoRadio = document.querySelector('input[value="video"]');
+                    let pictureInput = document.querySelector('input[name="picture"]');
+                    let videoInput = document.querySelector('input[name="video"]');
+
+                    let currentSelection = null;
+
+                    pictureRadio.addEventListener('change', function() {
+                        toggleUploadSection('picture-upload', 'video-upload', pictureInput, videoInput);
+                    });
+
+                    videoRadio.addEventListener('change', function() {
+                        toggleUploadSection('video-upload', 'picture-upload', videoInput, pictureInput);
+                    });
+
+                    function toggleUploadSection(showSectionId, hideSectionId, showFileInput, hideFileInput) {
+                        let showSection = document.getElementById(showSectionId);
+                        let hideSection = document.getElementById(hideSectionId);
+
+
+                        hideFileInput.disabled = true;
+
+                        if (currentSelection === showSectionId) {
+                            return;
+                        }
+
+                        showFileInput.value = '';
+                        showFileInput.disabled = false;
+
+                        showSection.style.display = 'block';
+                        hideSection.style.display = 'none';
+
+                        currentSelection = showSectionId;
+                    }
+                });
+            </script>
 
 </body>
 </html>

@@ -8,7 +8,10 @@ from django.db import models
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.CharField(max_length=15000)
+    content = models.CharField(max_length=500)
+    post_type = models.CharField(max_length=20, choices=[('picture', 'Picture'), ('video', 'Video')])
+    picture = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    video = models.FileField(upload_to='videos/', blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
