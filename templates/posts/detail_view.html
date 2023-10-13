@@ -1,0 +1,63 @@
+{% extends "profile/header.html" %}
+<style>
+    /* Your existing styles */
+
+    .post-card {
+        border-radius: 10px;
+        margin: 10px;
+        padding: 15px;
+        max-width: 300px;
+        cursor: pointer;
+        background-color: #f9f9f9;
+    }
+
+    .post-header {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .post-body {
+        padding: 10px;
+    }
+
+    .post-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        color: #888;
+    }
+</style>
+{% block content %}
+<div class="center-content">
+    <div class="testimonial-container">
+        <div class="col-md-8 col-xl-6 middle-wrapper">
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-md-12 grid-margin">
+                    <div class="post-card">
+                        <!-- Display detailed information for the post -->
+                        <div class="post-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="img-xs rounded-circle" src="{{ post.user.profile_image.url }}" alt="{{ post.user.username }}">
+                                    <div class="ml-2">
+                                        <p>{{ post.user.username }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <p class="tx-14">{{ post.content }}</p>
+                        </div>
+                        <div class="post-details">
+                            <p class="tx-11 text-muted">{{ post.createdAt | timesince }}</p>
+                            <p class="tx-11 text-muted">{{ post.createdAt | date:"F j, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
