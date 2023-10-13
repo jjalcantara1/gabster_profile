@@ -11,13 +11,13 @@
         font-size: 0; /* Hide the text content of the rating */
     }
 
+    /* Style for the testimonial card */
     .testimonial-card {
+        border: 1px solid #ccc;
         border-radius: 10px;
-        margin: 10px; /* Add margin to control spacing between cards */
-        padding: 15px; /* Adjust card padding */
-        max-width: 300px; /* Limit card width */
-        cursor: pointer; /* Add pointer cursor to indicate clickability */
-        background-color: #f9f9f9; /* Add a background color */
+        margin: 10px;
+        padding: 15px;
+        background-color: #f9f9f9;
     }
 
     .testimonial-header {
@@ -67,59 +67,26 @@
             <div class="testimonial-header">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
-                        <img class="img-xs rounded-circle" src="{{ testimonial.user_from.profile_image.url }}" alt="{{ testimonial.user_from.username }}">
+                        <a href="{% url 'profile' username=testimonial.user_from.username %}">
+                            <img class="img-xs rounded-circle" src="{{ testimonial.user_from.profile_image.url }}" alt="{{ testimonial.user_from.username }}">
+                        </a>
                         <div class="ml-2">
-                            <p>{{ testimonial.user_from.username }}</p>
+                            <a href="{% url 'profile' username=testimonial.user_from.username %}">
+                                <p>{{ testimonial.user_from.username }}</p>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-{#            <div class="testimonial-body">#}
-{#                <div class="rating">#}
-{#                    {% if testimonial.rating == 1 %}#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                    {% elif testimonial.rating == 2 %}#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                    {% elif testimonial.rating == 3 %}#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                    {% elif testimonial.rating == 4 %}#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9734;</span>#}
-{#                    {% elif testimonial.rating == 5 %}#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                        <span class="star">&#9733;</span>#}
-{#                    {% else %}#}
-{#                        <!-- Handle other cases if needed -->#}
-{#                    {% endif %}#}
-{#                </div>#}
-                <ul class="testimonial-list">
-                    <li class="testimonial-item">
-                        <p class="tx-14">{{ testimonial.content }}</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="tx-11 text-muted">{{ testimonial.createdAt | timesince }}</p>
-                            <p class="tx-11 text-muted">{{ testimonial.createdAt | date:"F j, Y" }}</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="testimonial-list">
+                <li class="testimonial-item">
+                    <p class="tx-14">{{ testimonial.content }}</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="tx-11 text-muted">{{ testimonial.createdAt | timesince }}</p>
+                        <p class="tx-11 text-muted">{{ testimonial.createdAt | date:"F j, Y" }}</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
